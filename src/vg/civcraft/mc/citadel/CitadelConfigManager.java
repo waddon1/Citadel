@@ -163,4 +163,8 @@ public class CitadelConfigManager {
 	public static boolean shouldLogReinforcement() {
 		return config.getBoolean("reinf_logging", false);
 	}
+
+	public static boolean showHealthAsPercent(){
+		return config.getBool("show_health_as_percent", true);
+	}
 }
