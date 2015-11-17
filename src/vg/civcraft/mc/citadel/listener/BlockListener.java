@@ -460,6 +460,17 @@ public class BlockListener implements Listener{
                             sb.append(maturationTime);
                             sb.append("]");
                         }
+						int acidTime = timeUntilAcidMature(reinforcement);
+						if (CitadelConfigManager.getAcidBlock() == block.getType()) {
+							sb.append(" Acid ");
+							if (acidTime != 0) {
+								sb.append("Immature[");
+								sb.append(acidTime);
+								sb.append("]");
+							} else {
+								sb.append("Mature");
+							}
+						}
                         if (reinforcement.isInsecure()) {
                             sb.append(" (Insecure)");
                         }
@@ -471,10 +482,10 @@ public class BlockListener implements Listener{
                         player.sendMessage(ChatColor.GREEN + sb.toString());
                     } else if(reinforcement.isAccessible(player, PermissionType.BLOCKS, PermissionType.DOORS, PermissionType.CHESTS)){
                         sb = new StringBuilder();
-                        boolean immature =
-                            timeUntilMature(reinforcement) != 0
-                            && (CitadelConfigManager.isMaturationEnabled()
-                                || CitadelConfigManager.getAcidBlock() == block.getType());
+                        boolean immature = timeUntilMature(reinforcement) != 0
+                            && CitadelConfigManager.isMaturationEnabled();
+						boolean acid = timeUntilAcidMature(reinforcement) != 0 
+							&& CitadelConfigManager.getAcidBlock() == block.getType();
                         String groupName = "!NULL!";
                         if (group != null) {
                             groupName = group.getName();
@@ -484,6 +495,9 @@ public class BlockListener implements Listener{
                         if(immature){
                             sb.append(" (Hardening)");
                         }
+						if(acid){
+							sb.append(" (Acid Maturing)");
+						}
                         if (reinforcement.isInsecure()) {
                             sb.append(" (Insecure)");
                         }

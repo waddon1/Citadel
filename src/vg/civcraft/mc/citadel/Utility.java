@@ -337,6 +337,29 @@ public class Utility {
         return 0;
     }
     /**
+     * Used to get the amount of time left until a reinforcement's acid component is mature.
+     * @param Reinforcement.
+     * @return Returns 0 if it is mature or the time in minutes until it is mature.
+     */
+    public static int timeUntilAcidMature(Reinforcement reinforcement) {
+        // Doesn't explicitly save the updated Acid Maturation time into the cache.
+        //  That's the responsibility of the caller.
+        if (reinforcement instanceof PlayerReinforcement){
+            int maturationTime = reinforcement.getAcidMaturationTime();
+            if (maturationTime > 0) {
+                final int curMinute = (int)(System.currentTimeMillis() / 60000L);
+                if (curMinute >= maturationTime) {
+                    maturationTime = 0;
+                    reinforcement.setMaturationTime(0);
+                } else {
+                    maturationTime = maturationTime - curMinute;
+                }
+            }
+            return (int) maturationTime; // should be small enough by now
+        }
+        return 0;
+    
+    /**
      * 
      * @param The Player who broke the reinforcement
      * @param The Reinforcement broken.
