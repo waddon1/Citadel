@@ -177,14 +177,30 @@ public class ReinforcementManager {
 
 			@Override
 			public void run() {
+				long cached = 0l;
+				long dirty = 0l;
+				long s = 0l
+				if (CitadelConfigManager.shouldLogInternal()) {
+					Citadel.Log("Running Scheduled Save");
+					s = System.currentTimeMillis();
+				}
 				List<Reinforcement> reins = new ArrayList<Reinforcement>();
 				synchronized(reinforcements){
-					for (Reinforcement r: reinforcements.asMap().values())
-						reins.add(r);
+					for (Reinforcement r: reinforcements.asMap().values()) {
+						if (r.isDirty()) {
+							reins.add(r);
+							dirty++;
+						}
+						cached++;
+					}
 				}
 				for (Reinforcement r: reins) {
-					if (r.isDirty())
-						saveReinforcement(r);
+					saveReinforcement(r);
+				}
+				if (CitadelConfigManager.shouldLogInternal()) {
+					s = System.currentTimeMillis() - s;
+					Citadel.Log("Scheduled Save complete in " + s + " ms. Cache holds " +
+						cached + " entries, " + dirty + " entries saved to DB.");
 				}
 			}
 			
