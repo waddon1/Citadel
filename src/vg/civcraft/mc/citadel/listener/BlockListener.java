@@ -87,8 +87,8 @@ public class BlockListener implements Listener{
 			ItemStack stack = event.getItemInHand();
 			rein = isDroppedReinforcementBlock(p, stack, loc);
 			if (rein != null){
-			rm.saveInitialReinforcement(rein);
-			return;
+				rm.saveInitialReinforcement(rein);
+				return;
 			}
 		}
 		PlayerState state = PlayerState.get(p);
@@ -113,7 +113,7 @@ public class BlockListener implements Listener{
 		if (inv.contains(type.getMaterial(), required)) {
 			try {
 				if (createPlayerReinforcement(p, state.getGroup(), b, type) == null) {
-						p.sendMessage(ChatColor.RED + String.format("%s is not a reinforcible material ", b.getType().name()));
+					p.sendMessage(ChatColor.RED + String.format("%s is not a reinforcible material ", b.getType().name()));
 				} else {
 					state.checkResetMode();
 				}	
@@ -155,7 +155,7 @@ public class BlockListener implements Listener{
 					event.setCancelled(true);
 					return;
 				}
-				if(reinforcementDamaged(rein)) {
+				if(reinforcementDamaged(player, rein)) {
             		event.setCancelled(true);
             	}
             }
@@ -195,7 +195,7 @@ public class BlockListener implements Listener{
             		is_cancelled = true;
             	}
             	else {
-            		is_cancelled = reinforcementDamaged(rein);
+            		is_cancelled = reinforcementDamaged(player, rein);
             	}
             }
             if (!is_cancelled) {
@@ -208,11 +208,11 @@ public class BlockListener implements Listener{
         	Bukkit.getPluginManager().callEvent(dre);
         	
         	if(dre.isCancelled()) {
-        		is_cancelled = reinforcementDamaged(rein);
+        		is_cancelled = reinforcementDamaged(player, rein);
         		return;
         	}
         	else {
-        		is_cancelled = reinforcementDamaged(rein);
+        		is_cancelled = reinforcementDamaged(player, rein);
         	}
         }
 
