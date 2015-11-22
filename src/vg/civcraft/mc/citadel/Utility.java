@@ -345,7 +345,7 @@ public class Utility {
         // Doesn't explicitly save the updated Acid Maturation time into the cache.
         //  That's the responsibility of the caller.
         if (reinforcement instanceof PlayerReinforcement){
-            int maturationTime = reinforcement.getAcidMaturationTime();
+            int maturationTime = reinforcement.getAcidTime();
             if (maturationTime > 0) {
                 final int curMinute = (int)(System.currentTimeMillis() / 60000L);
                 if (curMinute >= maturationTime) {
@@ -358,6 +358,7 @@ public class Utility {
             return (int) maturationTime; // should be small enough by now
         }
         return 0;
+	}
     
     /**
      * 

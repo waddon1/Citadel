@@ -97,8 +97,7 @@ public class Acid extends PlayerCommand {
 					.getReinforcementType(pRein.getStackRepresentation());
 			ReinforcementType topReinType = ReinforcementType
 					.getReinforcementType(pTopRein.getStackRepresentation());
-			if (acidBlockType.getMaturationTime() < topReinType
-					.getMaturationTime()) {
+			if (acidBlockType.getAcidTime() < topReinType.getAcidTime()) {
 				p.sendMessage(ChatColor.RED
 						+ "This acid block is too weak for that reinforcement.");
 				return true;

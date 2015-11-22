@@ -9,6 +9,7 @@ import static vg.civcraft.mc.citadel.Utility.maybeReinforcementDamaged;
 import static vg.civcraft.mc.citadel.Utility.reinforcementBroken;
 import static vg.civcraft.mc.citadel.Utility.reinforcementDamaged;
 import static vg.civcraft.mc.citadel.Utility.timeUntilMature;
+import static vg.civcraft.mc.citadel.Utility.timeUntilAcidMature;
 import static vg.civcraft.mc.citadel.Utility.wouldPlantDoubleReinforce;
 
 import java.util.Arrays;
