@@ -34,8 +34,7 @@ public class Information extends PlayerCommand{
 			state.reset();
 		}
 		else{
-			p.sendMessage(ChatColor.GREEN + "Reinforcement mode changed to "
-					+ ReinforcementMode.REINFORCEMENT_INFORMATION.name() + ".");
+			p.sendMessage(ChatColor.GREEN + "You are now in Information mode, click on blocks to see their reinforcement information! \n Type /cti or /cto to turn this off.");
 			state.setMode(ReinforcementMode.REINFORCEMENT_INFORMATION);
 		}
 		return true;
