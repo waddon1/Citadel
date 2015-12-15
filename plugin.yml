@@ -13,11 +13,11 @@ commands:
  ctb:
   aliases: [ctbypass, bypass]
  cti:
-  aliases: [ctinformation, info]
+  aliases: [ctinformation, info, ctinfo]
  ctin:
   aliases: [ctinsecure]
  ctm:
-  aliases: [ctmaterials]
+  aliases: [ctmaterials, materials]
  cto:
   aliases: [ctoff, off]
  cts:
