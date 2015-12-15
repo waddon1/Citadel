@@ -19,7 +19,7 @@ commands:
  ctm:
   aliases: [ctmaterials]
  cto:
-  aliases: [ctoff]
+  aliases: [ctoff, off]
  cts:
   aliases: [ctstats]
   permission: citadel.admin
