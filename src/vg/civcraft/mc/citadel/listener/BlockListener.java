@@ -57,6 +57,7 @@ import vg.civcraft.mc.citadel.events.ReinforcementDamageEvent;
 import vg.civcraft.mc.citadel.misc.ReinforcemnetFortificationCancelException;
 import vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement;
 import vg.civcraft.mc.citadel.reinforcement.Reinforcement;
+import vg.civcraft.mc.citadel.reinforcementtypes.ExclusiveReinforcementType;
 import vg.civcraft.mc.citadel.reinforcementtypes.ReinforcementType;
 import vg.civcraft.mc.namelayer.group.Group;
 import vg.civcraft.mc.namelayer.group.GroupType;
@@ -104,6 +105,12 @@ public class BlockListener implements Listener{
 		 // Don't allow double reinforcing reinforceable plants
         if (wouldPlantDoubleReinforce(b)) {
             p.sendMessage(ChatColor.RED + "Cancelled block place, crop would already be reinforced.");
+            event.setCancelled(true);
+            return;
+        }
+        // Don't allow incorrect reinforcement with exclusive reinforcement types
+        if (!ExclusiveReinforcementType.canReinforce(type.getMaterial(), b.getType())) {
+            p.sendMessage(ChatColor.RED + "That material cannot reinforce that type of block. Try a different reinforcement material.");
             event.setCancelled(true);
             return;
         }
@@ -542,6 +549,13 @@ public class BlockListener implements Listener{
                 	ReinforcementType type = ReinforcementType.getReinforcementType(stack);
                 	if (type == null){
                 		player.sendMessage(ChatColor.RED + stack.getType().name() + " is not a reinforcable material.");
+                		player.sendMessage(ChatColor.RED + "Left Reinforcement mode.");
+                		state.reset();
+                		return;
+                	}
+                	// Don't allow incorrect reinforcement with exclusive reinforcement types
+                	if (!ExclusiveReinforcementType.canReinforce(type.getMaterial(), block.getType())) {
+                		player.sendMessage(ChatColor.RED + "That material cannot reinforce that type of block. Try a different reinforcement material.");
                 		player.sendMessage(ChatColor.RED + "Left Reinforcement mode.");
                 		state.reset();
                 		return;
