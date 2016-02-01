@@ -43,9 +43,9 @@ reinforcements:
   requirements: 1
   return: 0
   percent_chance: 100
-  hit_points: 2147483646
-  mature_time: 2147483646
-  acid_time: 2147483646
+  hit_points: 147483646
+  mature_time: 147483646
+  acid_time: 147483646
   scale_amount: 1
   lore:
 #natural_reinforcements:
@@ -89,3 +89,9 @@ acidblock_material: GOLD_BLOCK
 # If set to true then instead of dropping the reinforcement a block with the specified reinforcement value will be dropped.
 drop_reinforced_block: false
 save_interval_ticks: 500
+mysql:
+ hostname: "localhost"
+ port: 3306
+ dbname: "bukkit"
+ username: "bukkit"
+ password: ""
