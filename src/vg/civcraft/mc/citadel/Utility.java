@@ -680,14 +680,6 @@ public class Utility {
         return maturation;
     }
     
-    private static int getIntFormofAcidMaturation(long creation, ItemStack stack) {
-		int maturation = (int)(creation / 60000) + 
-				ReinforcementType.
-				getReinforcementType(stack)
-				.getAcidTime();
-		return maturation;
-    }
-    
     public static Block findPlantSoil(Block block){
         final Set<Material> soilTypes = getPlantSoilTypes(block.getType());
         if(soilTypes.size() <= 0){

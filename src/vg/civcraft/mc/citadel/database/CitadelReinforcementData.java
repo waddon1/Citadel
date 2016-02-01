@@ -192,7 +192,7 @@ public class CitadelReinforcementData {
 			ver = checkVersion(plugin.getName());
 			Citadel.Log("The update to Version 7 took " + (System.currentTimeMillis() / first_time) / 1000 + " seconds.");
 		}
-		if (ver == 7) {
+		if (ver == 7){
 			long first_time = System.currentTimeMillis();
 			Citadel.Log("Updating to version 8: The acid test. Note: This will take a while.");
 			db.execute("alter table reinforcement add acid_time int not null;"); 
@@ -201,7 +201,7 @@ public class CitadelReinforcementData {
 			ver = checkVersion(plugin.getName());
 			Citadel.Log("The update to Version 8 took " + (System.currentTimeMillis() / first_time) / 1000 + " seconds.");
 		}
-		if (ver == 8){
+		if (ver == 8) {
 			long first_time = System.currentTimeMillis();
 			db.execute("alter table reinforcement_id drop primary key,"
 					+ " add primary key (rein_id, x, y, z, world);");
@@ -380,7 +380,7 @@ public class CitadelReinforcementData {
 				return rein;
 			}
 			else if (rein_type.equals("MultiBlockReinforcement")){
-				int id = set.getInt(10);
+				int id = set.getInt(9);
 				set.close();
 				MultiBlockReinforcement rein = MultiBlockReinforcement.getMultiRein(id);
 				if (rein != null)
