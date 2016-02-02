@@ -796,8 +796,9 @@ public class CitadelReinforcementData {
 			selectReinCountForGroup.setString(1, group);
 			ResultSet set = selectReinCountForGroup.executeQuery();
 			set.next();
+			int res = set.getInt(1);
 			set.close();
-			return set.getInt(1);
+			return res;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -810,8 +811,9 @@ public class CitadelReinforcementData {
 			PreparedStatement selectReinCount = db.prepareStatement(this.selectReinCount);
 			ResultSet set = selectReinCount.executeQuery();
 			set.next();
+			int res = set.getInt(1);
 			set.close();
-			return set.getInt(1);
+			return res;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
