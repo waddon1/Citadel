@@ -124,6 +124,10 @@ public class CitadelConfigManager {
 		return config.getInt("save_interval_ticks", 500);
 	}
 	
+	public static int getDayMultiplier(){
+		return config.getInt("reinforcement_damageMultiplier", 7);
+	}
+	
 	public static String getHostName(){
 		return config.getString("mysql.hostname", "localhost");
 	}
@@ -142,5 +146,21 @@ public class CitadelConfigManager {
 	
 	public static String getPassword(){
 		return config.getString("mysql.password", "");
+	}
+
+	public static boolean shouldLogInternal() {
+		return config.getBoolean("internal_logging", false);
+	}
+
+	public static boolean shouldLogPlayerCommands() {
+		return config.getBoolean("command_logging", false);
+	}
+
+	public static boolean shouldLogBreaks() {
+		return config.getBoolean("break_logging", false);
+	}
+
+	public static boolean shouldLogReinforcement() {
+		return config.getBoolean("reinf_logging", false);
 	}
 }

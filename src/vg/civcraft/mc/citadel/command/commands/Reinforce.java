@@ -3,23 +3,20 @@ package vg.civcraft.mc.citadel.command.commands;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import vg.civcraft.mc.citadel.PlayerState;
 import vg.civcraft.mc.citadel.ReinforcementMode;
 import vg.civcraft.mc.namelayer.GroupManager;
 import vg.civcraft.mc.namelayer.GroupManager.PlayerType;
 import vg.civcraft.mc.namelayer.NameAPI;
-import vg.civcraft.mc.civmodcore.command.PlayerCommand;
 import vg.civcraft.mc.namelayer.command.TabCompleters.GroupTabCompleter;
 import vg.civcraft.mc.namelayer.group.Group;
 import vg.civcraft.mc.namelayer.permission.GroupPermission;
 import vg.civcraft.mc.namelayer.permission.PermissionType;
 
-public class Reinforce extends PlayerCommand {
+public class Reinforce extends PlayerCommandMiddle {
 
 	private GroupManager gm = NameAPI.getGroupManager();
 	
@@ -43,7 +40,7 @@ public class Reinforce extends PlayerCommand {
 		if(args.length == 0){
 			groupName = gm.getDefaultGroup(uuid);
 			if(groupName == null){
-				p.sendMessage(ChatColor.RED + "You need to reinforce to a group! Try /ctr groupname. \n Or /nlcg groupname if you don't have a group yet.");
+				sendAndLog(p, ChatColor.RED, "You need to reinforce to a group! Try /ctr groupname. \n Or /nlcg groupname if you don't have a group yet.");
 				return true;
 			}
 		}
@@ -52,27 +49,27 @@ public class Reinforce extends PlayerCommand {
 		}
 		Group g = gm.getGroup(groupName);
 		if (g == null){
-			p.sendMessage(ChatColor.RED + "That group does not exist.");
+			sendAndLog(p, ChatColor.RED, "That group does not exist.");
 			return true;
 		}
 		PlayerType type = g.getPlayerType(uuid);
 		if (!p.hasPermission("citadel.admin") && !p.isOp() && type == null){
-			p.sendMessage(ChatColor.RED + "You are not on this group.");
+			sendAndLog(p, ChatColor.RED, "You are not on this group.");
 			return true;
 		}
 		GroupPermission gPerm = gm.getPermissionforGroup(g);
 		if (!p.hasPermission("citadel.admin") && !p.isOp() && !gPerm.isAccessible(type, PermissionType.BLOCKS)){
-			p.sendMessage(ChatColor.RED + "You do not have permission to "
+			sendAndLog(p, ChatColor.RED, "You do not have permission to "
 					+ "place a reinforcement on this group.");
 			return true;
 		}
 		PlayerState state = PlayerState.get(p);
 		if (state.getMode() == ReinforcementMode.REINFORCEMENT){
-			p.sendMessage(ChatColor.GREEN + state.getMode().name() + " has been disabled");
+			sendAndLog(p, ChatColor.GREEN, state.getMode().name() + " has been disabled");
 			state.reset();
 		}
 		else{
-			p.sendMessage(ChatColor.GREEN + "You are now in Reinforcement mode, hit blocks with a reinforcement material to secure them. \n Type /ctr or /cto to turn this off when you are done.");
+			sendAndLog(p, ChatColor.GREEN, "You are now in Reinforcement mode, hit blocks with a reinforcement material to secure them. \n Type /ctr or /cto to turn this off when you are done.");
 			state.setMode(ReinforcementMode.REINFORCEMENT);
 			state.setGroup(g);
 		}
@@ -92,5 +89,4 @@ public class Reinforce extends PlayerCommand {
 			return new ArrayList<String>();
 		}
 	}
-
 }

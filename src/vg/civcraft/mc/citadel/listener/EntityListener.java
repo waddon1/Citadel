@@ -6,6 +6,7 @@ import static vg.civcraft.mc.citadel.Utility.maybeReinforcementDamaged;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -74,7 +75,7 @@ public class EntityListener implements Listener{
 	                iterator.remove();
 	            }
             } catch (NoClassDefFoundError e){
-            	Citadel.Log("NoClassDefFoundError");
+            	Citadel.getInstance().getLogger().log(Level.WARNING, "Class Definition not found in explode", e);
             }
         }
     }
@@ -89,21 +90,16 @@ public class EntityListener implements Listener{
         ecbe.setCancelled(maybeReinforcementDamaged(ecbe.getBlock()));
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void spawn(CreatureSpawnEvent cse) {
     	ReinforcementManager reinforcementManager = Citadel.getReinforcementManager();
         EntityType type = cse.getEntityType();
-        if (type != EntityType.IRON_GOLEM && type != EntityType.SNOWMAN) return;
+        if (type != EntityType.IRON_GOLEM && type != EntityType.SNOWMAN && type != EntityType.WITHER && type != EntityType.SILVERFISH) return;
 
         for (Block block : getGolemBlocks(type, cse.getLocation().getBlock())) {
             Reinforcement reinforcement = reinforcementManager.getReinforcement(block);
             if (reinforcement != null) {
-            	/*
-            	Citadel.verbose(
-                        VerboseMsg.GolemCreated,
-            			reinforcement.getBlock().getLocation().toString());
-            			*/
-                reinforcementManager.deleteReinforcement(reinforcement);
+            	cse.setCancelled(true);
             }
         }
     }
