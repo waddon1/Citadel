@@ -131,14 +131,18 @@ public class PlayerReinforcement extends Reinforcement{
      */
     public String getHealthText() {
         double health = getHealth();
-        if (health > 0.75) {
-            return "excellently";
-        } else if (health > 0.50) {
-            return "well";
-        } else if (health > 0.25) {
-            return "decently";
+        if (CitadelConfigManager.showHealthAsPercent()) {
+        	return health * 100 + "%";
         } else {
-            return "poorly";
+          if (health > 0.75) {
+              return "excellently";
+          } else if (health > 0.50) {
+              return "well";
+          } else if (health > 0.25) {
+              return "decently";
+          } else {
+              return "poorly";
+          }
         }
     }
     /**
