@@ -5,7 +5,7 @@
 	<groupId>vg.civcraft.mc.citadel</groupId>
 	<artifactId>Citadel</artifactId>
 	<packaging>jar</packaging>
-	<version>3.4.45</version>
+	<version>3.5.0</version>
 	<name>Citadel</name>
 	<url>https://github.com/Civcraft/Citadel</url>
 
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<version>1.9-R0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>vg.civcraft.mc.civmodcore</groupId>
@@ -54,11 +54,6 @@
 			<artifactId>NameLayer</artifactId>
 			<version>2.5.43</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>vg.civcraft.mc.bettershards</groupId>

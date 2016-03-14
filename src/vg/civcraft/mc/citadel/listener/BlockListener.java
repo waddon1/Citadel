@@ -25,7 +25,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.ContainerBlock;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -348,7 +348,7 @@ public class BlockListener implements Listener{
         if (block_mat == Material.HOPPER || block_mat == Material.DROPPER){
             for (BlockFace direction : all_sides) {
                 Block adjacent = block.getRelative(direction);
-                if (!(adjacent.getState() instanceof ContainerBlock)) {
+                if (!(adjacent.getState() instanceof InventoryHolder)) {
                     continue;
                 }
                 Reinforcement rein = rm.getReinforcement(adjacent);
@@ -363,7 +363,7 @@ public class BlockListener implements Listener{
         if (block_mat == Material.CHEST || block_mat == Material.TRAPPED_CHEST){
             for (BlockFace direction : planar_sides) {
                 Block adjacent = block.getRelative(direction);
-                if (!(adjacent.getState() instanceof ContainerBlock)) {
+                if (!(adjacent.getState() instanceof InventoryHolder)) {
                     continue;
                 }
                 Reinforcement rein = rm.getReinforcement(adjacent);
