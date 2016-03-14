@@ -14,6 +14,7 @@ import org.bukkit.material.Openable;
 
 import vg.civcraft.mc.citadel.Citadel;
 import vg.civcraft.mc.citadel.ReinforcementManager;
+import vg.civcraft.mc.citadel.CitadelConfigManager;
 import vg.civcraft.mc.citadel.Utility;
 import vg.civcraft.mc.citadel.reinforcementtypes.ReinforcementType;
 import vg.civcraft.mc.namelayer.GroupManager;

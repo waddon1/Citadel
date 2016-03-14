@@ -165,6 +165,6 @@ public class CitadelConfigManager {
 	}
 
 	public static boolean showHealthAsPercent(){
-		return config.getBool("show_health_as_percent", true);
+		return config.getBoolean("show_health_as_percent", true);
 	}
 }
